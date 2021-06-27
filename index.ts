@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Self from './resources/self';
 import Wallet from './resources/wallet';
-import Cards from './resources/cards';
+import Card from './resources/cards';
 import Payouts from './resources/payouts';
 import Airtime from './resources/airtime';
 
@@ -15,7 +15,7 @@ import Airtime from './resources/airtime';
 class WalletAfrica {
     public self = Self;
     public wallet = Wallet;
-    public cards = Cards;
+    public cards = Card;
     public payouts = Payouts;
     public airtime = Airtime;
     private _apiRoot = '';
