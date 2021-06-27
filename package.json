@@ -29,7 +29,7 @@
         "mocha": "^7.0.1"
     },
     "scripts": {
-        "test": "npm run build && env SECRET_KEY= PUBLIC_KEY= mocha dist/tests/\\*\\*/\\*.spec.js --timeout 15000 && rm -rf dist",
+        "test": "npm run build && env SECRET_KEY=hfucj5jatq8h PUBLIC_KEY=uvjqzm5xl6bw mocha dist/tests/\\*\\*/\\*.spec.js --timeout 50000 && rm -rf dist",
         "build": "tsc && cp types.d.ts dist/ && cp package.json dist/ && cp README.md dist/ && cp LICENSE dist/"
     },
     "repository": {
@@ -45,6 +45,7 @@
         "naira",
         "transfer",
         "bank",
+        "payouts",
         "airtime"
     ],
     "author": "Oladiran Segun <sheghunoladiran9@gmail.com> (http://github.com/sheghun)",

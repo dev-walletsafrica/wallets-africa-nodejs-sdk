@@ -15,8 +15,8 @@ class Airtime {
     /*
         Returns a list of all airtime providers
      */
-    static async airtimeProviders(options: {Code: string; Amount: number; PhoneNumber: string}) {
-        const body = {...options, SecretKey: this.secretKey};
+    static async airtimeProviders() {
+        const body = {SecretKey: this.secretKey};
         const url = `${this.endpoint}/providers`;
 
         return axios.post(url, body);
@@ -32,3 +32,5 @@ class Airtime {
         return axios.post(url, body);
     }
 }
+
+export default Airtime;

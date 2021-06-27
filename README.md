@@ -45,25 +45,28 @@ try {
         // ...
     }
 }
-```    
+```
+
 ### Examples
 
 #### Self
+
 > The Self property of the WalletAfrica class exposes methods to manage the user account.
 
 **Transactions** - Get a list of previous transactions within a timeframe
+
 ```js
 // get recent transactions
 try {
     const res = await walletAfrica.self.transactions([options]);
     // * options <object> - optional parameters passed to the transactions method
-            // * skip <number> - 0
-            // * take <number> - 10
-            // * dateFrom <string> - '2020-01-15'
-            // * dateTo <string> - '2020-03-15'
-            // * transactionType <number> - 1
-            // * secretKey <string> - 'apisecret'
-            // * currency <string> - 'NGN'
+    // * skip <number> - 0
+    // * take <number> - 10
+    // * dateFrom <string> - '2020-01-15'
+    // * dateTo <string> - '2020-03-15'
+    // * transactionType <number> - 1
+    // * secretKey <string> - 'apisecret'
+    // * currency <string> - 'NGN'
 
     if (res.status === 200) {
         // Successful
@@ -89,9 +92,9 @@ All files are compiled to JavaScript and only the necessary files are published
 
 -   Self
 -   Wallet
--   Bank
+-   Payouts
+-   Cards
 -   Airtime
--   Account
 
 ##### Contributing
 

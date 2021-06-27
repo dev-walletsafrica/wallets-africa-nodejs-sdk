@@ -37,16 +37,6 @@ class Self {
     }
 
     /**
-     * Verifies BVN
-     */
-    static async verifyBvn(options: {bvn: string; dateOfBirth: string | Date}) {
-        const body = {...options, SecretKey: this.secretKey};
-        const url = `${this.endpoint}/verifybvn`;
-
-        return axios.post(url, body);
-    }
-
-    /**
      * Retrieves and returns a list of users
      */
     static async getWallets() {

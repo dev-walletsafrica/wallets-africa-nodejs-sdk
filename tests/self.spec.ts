@@ -1,5 +1,5 @@
 import WalletAfrica from '../index';
-import {assert, expect} from 'chai';
+import {assert} from 'chai';
 
 /*
    Self resource tests file
@@ -40,17 +40,6 @@ describe('Self resource tests', function() {
                 ResponseCode: '200',
                 Message: 'Transaction Retrieved successfully',
             },
-        });
-    });
-
-    it('Verify BVN', async function() {
-        const res = await walletAfrica.self.verifyBvn({
-            bvn: process.env.BVN as string,
-            dateOfBirth: process.env.BVN_DATE as string,
-        });
-        assert.strictEqual(res.status, 200);
-        assert.containsAllDeepKeys(res.data, {
-            BVN: process.env.BVN as string,
         });
     });
 

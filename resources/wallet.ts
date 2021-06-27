@@ -41,26 +41,6 @@ class Wallet {
     }
 
     /**
-     * Creates a new customer
-     */
-    static async create(options: CreateOptions) {
-        const body = {...options, SecretKey: this.secretKey};
-        const url = `${this.endpoint}/create`;
-
-        return axios.post(url, body);
-    }
-
-    /**
-     * Verifies new customer
-     */
-    static async verify(options: {phoneNumber: string; otp: string}) {
-        const body = {...options, SecretKey: this.secretKey};
-        const url = `${this.endpoint}/verify`;
-
-        return axios.post(url, body);
-    }
-
-    /**
      * Generate
      */
     static async generate(options: CreateOptions & {currency?: string}) {
@@ -74,18 +54,7 @@ class Wallet {
     }
 
     /**
-     * Generates account number
-     * @params {string} phone - phone to generate account number against
-     */
-    static async generateAccountNumber(phone: string) {
-        const body = {phoneNumber: phone, SecretKey: this.secretKey};
-        const url = `${this.endpoint}/generateaccountnumber`;
-
-        return axios.post(url, body);
-    }
-
-    /**
-     * Retrieves account number
+     * Retrieves account number tied to a wallet
      */
     static async retrieveAccountNumber(phone: string) {
         const body = {phoneNumber: phone, SecretKey: this.secretKey};
@@ -95,7 +64,7 @@ class Wallet {
     }
 
     /**
-     * Sets password against a phone number
+     * Sets password for a subwallet
      */
     static async setPassword(options: {phoneNumber: string; password: string}) {
         const body = {...options, SecretKey: this.secretKey};
@@ -105,7 +74,7 @@ class Wallet {
     }
 
     /**
-     * Sets pin
+     * Sets pin for a subwallet
      */
     static async setPin(options: {phoneNumber: string; transactionPin: string}) {
         const body = {...options, SecretKey: this.secretKey};
@@ -126,20 +95,20 @@ class Wallet {
     }
 
     /**
-     * Verifies BVN
+     * Gets a user by phone number
      */
-    static async verifyBvn(options: {dateOfBirth: string; bvn: string; phoneNumber: string}) {
-        const body = {...options, SecretKey: this.secretKey};
-        const url = `${this.endpoint}/verifybvn`;
+    static async getUserByPhone(phone: string) {
+        const body = {phoneNumber: phone, SecretKey: this.secretKey};
+        const url = `${this.endpoint}/getuser`;
 
         return axios.post(url, body);
     }
 
     /**
-     * Gets a user
+     * Gets a user by email
      */
-    static async getUser(phone: string) {
-        const body = {phoneNumber: phone, SecretKey: this.secretKey};
+    static async getUserByEmail(email: string) {
+        const body = {email: email, SecretKey: this.secretKey};
         const url = `${this.endpoint}/getuser`;
 
         return axios.post(url, body);
@@ -148,11 +117,7 @@ class Wallet {
     /**
      * Returns wallet balance
      */
-    static async getBalance(options: {
-        phoneNumber: string;
-        transactionPin: string;
-        currency?: currencyType;
-    }) {
+    static async getBalance(options: {phoneNumber: string; currency?: currencyType}) {
         if (!('currency' in options)) {
             options.currency = 'NGN';
         }

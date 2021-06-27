@@ -1,10 +1,9 @@
 import WalletAfrica from '../index';
-import {assert, expect} from 'chai';
+import {assert} from 'chai';
 import faker from 'faker';
-import {AxiosError} from 'axios';
 
 /*
-   Self resource tests file
+   Wallet resource tests file
  */
 
 // The key is supplied from package.json under the scripts command
@@ -14,58 +13,33 @@ const walletAfrica = new WalletAfrica({
     sandbox: true,
 });
 
-const phone1 = '08099999999';
+const phone1 = '08023634895';
 
-const phone2 = '08099999999';
+const phone2 = '08057998539';
 
-const transactionPin = '1111';
+const phone3 = '2348148657415';
 
-let expData = {
-    FirstName: '',
-    LastName: '',
-    Email: '',
-    PhoneNumber: '',
-    BVN: '',
-    Password: '',
-    DateOfBirth: '',
-    DateSignedup: '',
-    AccountNo: '',
-    Bank: '',
-    AccountName: '',
-    AvailableBalance: 0,
-};
+const phone4 = '13990205533';
+
+const phone5 = '2344049658848';
+
+const email = 'ralphdibny@centralcity.com';
 
 describe('Wallet resource tests', function() {
-    it('Create', async function() {
-        const res = await walletAfrica.wallet.create({
-            dateOfBirth: '22-08-1923',
-            email: faker.internet.email(),
-            firstName: faker.name.firstName(),
-            lastName: faker.name.lastName(),
-            password: 'anything',
-            phoneNumber: phone1,
-        });
-        assert.strictEqual(res.status, 200);
-        assert.containsAllDeepKeys(res.data, {
-            Response: {
-                ResponseCode: '200',
-                Message: 'Wallet created successfully',
-            },
-            Data: expData,
-        });
-        // Assign response to expected data
-        // So we can reuse contents for other tests
-        expData = res.data.DATA;
-    });
-
     it('Debit', async function() {
         try {
             const res = await walletAfrica.wallet.debit({
                 transactionReference: (Date.now() as any) as string,
-                amount: 100,
+                amount: 10,
                 phoneNumber: phone1,
             });
             assert.equal(res.status, 200);
+            assert.containsAllDeepKeys(res.data, {
+                Response: {
+                    ResponseCode: '200',
+                    Message: 'Transaction Completed successfully',
+                },
+            });
         } catch (err) {
             if (err.response) {
                 const res = err.response;
@@ -83,13 +57,14 @@ describe('Wallet resource tests', function() {
         try {
             const res = await walletAfrica.wallet.credit({
                 transactionReference: (Date.now() as any) as string,
-                amount: 100,
-                phoneNumber: phone1,
+                amount: 10,
+                phoneNumber: phone2,
             });
             assert.strictEqual(res.status, 200);
             assert.containsAllDeepKeys(res.data, {
                 Response: {
                     ResponseCode: '200',
+                    Message: 'Transaction Completed successfully',
                 },
             });
         } catch (err) {
@@ -111,13 +86,101 @@ describe('Wallet resource tests', function() {
             email: faker.internet.email(),
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
-            password: faker.name.firstName(),
-            phoneNumber: phone2,
         });
         assert.strictEqual(res.status, 200);
         assert.containsAllDeepKeys(res.data, {
             Response: {
                 ResponseCode: '200',
+                Message: 'Wallet created successfully',
+            },
+        });
+    });
+
+    it('Retrieve Account Number', async function() {
+        const res = await walletAfrica.wallet.retrieveAccountNumber(phone3);
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            Response: {
+                ResponseCode: '200',
+                Message: 'User NUBAN Retrieved',
+            },
+        });
+    });
+
+    it('Set Password', async function() {
+        const res = await walletAfrica.wallet.setPassword({
+            password: 'p1ert0tuml0c0m0t0r',
+            phoneNumber: phone4,
+        });
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            ResponseCode: '200',
+            Message: 'Password set successfully',
+        });
+    });
+
+    it('Set Pin', async function() {
+        const res = await walletAfrica.wallet.setPin({
+            transactionPin: '0799',
+            phoneNumber: phone4,
+        });
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            ResponseCode: '200',
+            Message: 'Transaction pin reset successfully',
+        });
+    });
+
+    it('Transactions', async function() {
+        const res = await walletAfrica.wallet.transactions({
+            skip: 0,
+            take: 10,
+            dateFrom: '2020-01-15',
+            dateTo: '2020-01-15',
+            transactionType: 1,
+            phoneNumber: phone2,
+            transactionPin: '1111',
+        });
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            Response: {
+                ResponseCode: '200',
+                Message: 'Transactions Retrieved successfully',
+            },
+        });
+    });
+
+    it('Get User By Phone', async function() {
+        const res = await walletAfrica.wallet.getUserByPhone(phone1);
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            Response: {
+                ResponseCode: '200',
+                Message: 'Successful',
+            },
+        });
+    });
+
+    it('Get User By Email', async function() {
+        const res = await walletAfrica.wallet.getUserByEmail(email);
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            Response: {
+                ResponseCode: '200',
+                Message: 'Successful',
+            },
+        });
+    });
+
+    it('Get Balance', async function() {
+        const res = await walletAfrica.wallet.getBalance({
+            phoneNumber: phone5,
+        });
+        assert.strictEqual(res.status, 200);
+        assert.containsAllDeepKeys(res.data, {
+            Response: {
+                ResponseCode: '200',
+                Message: 'Balance Retrieved successfully',
             },
         });
     });
