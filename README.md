@@ -23,7 +23,7 @@ npm install wallets-africa
 ### Usage
 
 ```js
-const WalletAfrica = require('wallets-africa');
+const WalletAfrica = require('wallets-africa').default;
 
 const walletAfrica = new WalletAfrica({
     secretKey: process.env.SECRET_KEY,
