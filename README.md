@@ -17,7 +17,7 @@ Nodejs API wrapper for [Wallets Africa](https://wallets.africa/)
 ### Installation
 
 ```
-npm install wallets-africa
+npm i wallets-africa-api
 ```
 
 ### Usage
