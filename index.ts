@@ -8,7 +8,7 @@ import Airtime from './resources/airtime';
 /**
  * @class WalletAfrica
  * @author sheghun {@link https://github.com/sheghun}
- * {@link https://github.com/sheghun/wallets-africa-nodejs-sdk}
+ * {@link https://github.com/Alexjake660/wallets-africa-nodejs-sdk}
  *
  * Wallets Africa wrapper for communicating with the wallets africa api
  */

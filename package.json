@@ -1,5 +1,5 @@
 {
-    "name": "wallets-africa",
+    "name": "wallets-africa-api",
     "version": "1.0.3",
     "description": "Nodejs API wrapper for wallets africa ",
     "main": "index.js",
@@ -34,7 +34,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/sheghun/wallets-africa-nodejs-sdk.git"
+        "url": "git+https://github.com/Alexjake660/wallets-africa-nodejs-sdk.git"
     },
     "keywords": [
         "payment",
@@ -51,7 +51,7 @@
     "author": "Oladiran Segun <sheghunoladiran9@gmail.com> (http://github.com/sheghun)",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/sheghun/wallets-africa-nodejs-sdk/issues"
+        "url": "https://github.com/Alexjake660/wallets-africa-nodejs-sdk/issues"
     },
-    "homepage": "https://github.com/sheghun/wallets-africa-nodejs-sdk#readme"
+    "homepage": "https://github.com/Alexjake660/wallets-africa-nodejs-sdk#readme"
 }
