@@ -104,4 +104,4 @@ All files are compiled to JavaScript and only the necessary files are published
 
 ##### Tests
 
-To run tests you need to create a sandbox account you can do that [here](https://dev.wallets.africa/) after which you can add your public and private test keys to package.json
+To run tests you can use the sandbox account keys provided in the documentation.
